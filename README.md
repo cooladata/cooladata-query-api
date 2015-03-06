@@ -4,6 +4,7 @@ This repository provides basic examples of interacting with CoolaData's Query-AP
 
   - Java
   - .NET (C#)
+  - Javascript (With example of visuzliation using Google Charts)
   - PHP (Coming Soon...)
   - Python (Coming Soon...)
 
