@@ -1,0 +1,86 @@
+<html>
+ 
+    <head>
+
+        <title>Google Visualization API Example</title>
+
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
+        <script type="text/javascript">
+
+            google.load('visualization', '1.0', { 'packages': ['corechart'] });
+
+            google.setOnLoadCallback(drawChart);
+            
+            //Get the data from the CoolaData Query API
+            function drawChart() {
+                $.ajax({
+                    data: {tq: 'YOUR QUERY HERE'},
+                    url:'https://app.cooladata.com/api/projects/YOUR PROJECT ID HERE/cql/',
+                    headers: {Authorization: 'Token ' + 'YOUR TOKEN HERE'},
+                    dataType: 'json',
+                    accept:'application/json',
+                    contentType: 'application/json; indent=4',
+                    success: handleQueryResponse,
+                });
+            }
+
+            function handleQueryResponse(data) {
+
+                //Set the data and draw the table
+                var data = new google.visualization.DataTable(data.table);
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+                chart.draw(data);
+
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <!--Site header-->
+        <nav>
+            <ul>
+                <li><a href="PieOrColumnFromSpreadsheet.html">Pie of Column from Google Spreasheet</a></li>
+                <li><a href="CoolaDataAPIQueryExample.html">Column Chart from CoolaData's API</a></li>
+            </ul>
+        </nav>
+
+
+        <!--Div that will hold the pie chart-->
+        <div id="chart" style="height: 400px; width: 800px;"></div>
+
+        <!--Explanation-->
+        <div id="description">
+            <h1>Creating a chart using CoolaData's API</h1>
+            <ol>
+                <li>Get your API token from your CS</li>
+                <li>Get your project ID from the Admin Panel</li>
+                <li>Load the Google JS-API and AJAX packages</li>
+                <li>Load the Google visualization package</li>
+                <li>Set a callback to draw the chart once the data is received</li>
+                <li>Get your data using the following AJAX:</li>
+                <pre>$.ajax({
+    data: {tq: [Query]},
+    url:'https://app.cooladata.com/api/projects/[projectID]/cql/',
+    headers: {Authorization: 'Token [Token]'},
+    dataType: 'json',
+    accept:'application/json',
+    contentType: 'application/json; indent=4',
+    success: handleQueryResponse,
+});</pre>
+                <li>In the response handler, set your data as a Google visualization data table,</br>
+                    your chart as the Google visualization chart type you want to draw,</br>
+                    and draw your chart with the data received.
+                </li>
+                <li>See the source code for a detailed example!</li>
+            </ol>
+
+        </div>
+
+    </body>
+
+</html>
