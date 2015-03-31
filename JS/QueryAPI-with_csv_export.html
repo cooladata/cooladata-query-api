@@ -1,0 +1,39 @@
+<html>
+ 
+    <head>
+
+        <title>Cooladata CSV Response Demo</title>
+
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
+        <script type="text/javascript">
+			 $.ajax({
+                    data: {
+						tq: 'YOUR QUERY HERE', 
+						tqx:'out:csv;filename:myexport' 
+					}, 
+                    url:'https://app.cooladata.com/api/projects/YOUR PROJECT ID HERE/cql/',
+                    headers: {Authorization: 'Token ' + 'YOUR TOKEN HERE'},
+                    dataType: 'json',
+                    accept:'application/json',
+                    contentType: 'application/json; indent=4',
+                    success: handleQueryResponse,
+                });
+
+            function handleQueryResponse(data) {
+				document.getElementById('description').innerHTML = data;
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+        
+        <div id="description">
+        </div>
+
+    </body>
+
+</html>
