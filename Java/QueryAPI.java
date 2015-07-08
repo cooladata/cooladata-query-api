@@ -11,10 +11,9 @@ import java.net.URLConnection;
 public class QueryAPI {
     private static final String COOLADATA_TOKEN = "";
     private static final String COOLADATA_PROJECTID = "";
-    private static final String COOLADATA_ACCEPT_HTML_HEADER = "text/html";
     private static final String COOLADATA_ACCEPT_JSON_HEADER = "application/json";
     private static final String COOLADATA_CHARSET = "UTF-8";
-    private static final String COOLADATA_ENDPOINT = "https://app.cooladata.com/api/v1/projects/" + COOLADATA_PROJECTID + "/cql/";
+    private static final String COOLADATA_ENDPOINT = "https://app.cooladata.com/api/v2/projects/" + COOLADATA_PROJECTID + "/cql/";
     private static final String COOALDATA_AUTHENTICATION_HEADER = "Token " + COOLADATA_TOKEN;
 
     public static String runQuery(String query, String acceptType) throws IOException {
@@ -45,8 +44,12 @@ public class QueryAPI {
     }
 
     public static void main(String[] args) throws IOException {
-        String query = "Select count(*) from cooladata where date_range(yesterday)";
-        System.out.println(runQuery(query, COOLADATA_ACCEPT_HTML_HEADER));
+        String query = "select  format, sum(items) as items, sum(pageviews) as  pageviews from external.aggregations.total_items_pageviews where parent_host_domain = \"mtv.com\" and period between '2015-02-01' and '2015-02-31' group by format ";
+        long startTime = System.currentTimeMillis();
+        //System.out.println(System.currentTimeMillis()-startTime);
         System.out.println(runQuery(query, COOLADATA_ACCEPT_JSON_HEADER));
+        System.out.println(System.currentTimeMillis()-startTime);
+        //System.out.println(runQuery(query, COOLADATA_ACCEPT_JSON_HEADER));
+        //System.out.println(System.currentTimeMillis()-startTime);
     }
 }

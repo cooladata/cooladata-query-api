@@ -17,11 +17,10 @@
             function drawChart() {
                 $.ajax({
                     data: {tq: 'YOUR QUERY HERE'},
-                    url:'https://app.cooladata.com/api/projects/YOUR PROJECT ID HERE/cql/',
+                    url:'https://app.cooladata.com/api/v2/projects/YOUR PROJECT ID HERE/cql/',
                     headers: {Authorization: 'Token ' + 'YOUR TOKEN HERE'},
                     dataType: 'json',
                     accept:'application/json',
-                    contentType: 'application/json; indent=4',
                     success: handleQueryResponse,
                 });
             }

@@ -13,7 +13,7 @@ print_r($result);
 function curl_multi_query($token,$project_id,$query)
 {
 	for ($i = 0; $i < count($query); $i++) {
-			$url = 'https://app.cooladata.com/api/v1/projects/'.$project_id.'/cql/';
+			$url = 'https://app.cooladata.com/api/v2/projects/'.$project_id.'/cql/';
 			${"curl".$i} = curl_init();
 			curl_setopt(${"curl".$i},CURLOPT_URL, $url); 
 			curl_setopt(${"curl".$i},CURLOPT_POST, 1); 
